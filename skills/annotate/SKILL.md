@@ -53,7 +53,7 @@ Coordinates are pixels from the top-left of the image.
 
 - `color`: `red` for arrows/boxes/markers; `yellow` for highlights.
 - Text on busy backgrounds: keep `"background": true` (translucent white pad with red outline) unless the user says otherwise.
-- Font: bundled DejaVu Sans Bold (always present after `install-deps`).
+- Font: bundled DejaVu Sans Bold (always present after `setup-environment`).
 
 ## When the user wants something simple
 

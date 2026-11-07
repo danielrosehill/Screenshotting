@@ -33,7 +33,7 @@ The PDF page order follows the argument order. If the user has filenames like `s
 
 ## Backend selection
 
-The script prefers `img2pdf` (lossless, no re-encoding for JPEGs — much smaller PDFs) and falls back to `magick` if img2pdf isn't installed. Run the `install-deps` skill once to get img2pdf.
+The script prefers `img2pdf` (lossless, no re-encoding for JPEGs — much smaller PDFs) and falls back to `magick` if img2pdf isn't installed. Run the `setup-environment` skill once to get img2pdf.
 
 ## Common workflow
 

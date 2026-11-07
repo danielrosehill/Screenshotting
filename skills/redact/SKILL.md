@@ -7,7 +7,7 @@ description: "Pixelate, blur or black out regions of an existing screenshot. For
 
 For a page open in a browser, `spoof-page-screenshot` usually gives a better result: stand-in text looks real, where pixelated blocks draw attention. Use this skill for desktop apps, images already captured, and page content that cannot be spoofed (images, canvas).
 
-Hide sensitive regions of an image. Use this rather than `annotate` when the goal is privacy — defaults are tuned to make the redaction non-recoverable.
+Hide sensitive regions of an image. Use this rather than `annotate` when the goal is privacy. `scan-screenshot` supplies the regions.
 
 ## Originals-clean rule
 
@@ -23,9 +23,9 @@ bash "$CLAUDE_PLUGIN_ROOT/scripts/redact.sh" \
   --region X,Y,W,H [--region X,Y,W,H ...]
 ```
 
-## Why pixelate by default
+## Choosing a method
 
-Gaussian blur on text is reversible with deconvolution; coarse pixelation isn't. The script picks a block size of `min(W,H)/8` (floor 16) so even a small region collapses to ≤8 cells per side.
+Pixelate is the default because it looks tidy. Use `--method solid` for passwords, keys and anything else that must not be recoverable: tools exist that reconstruct pixelated text, and blur can be partly reversed too. Only a solid fill removes the pixels.
 
 ## EXIF strip
 
@@ -33,5 +33,5 @@ The script appends `-strip` to the ImageMagick pipeline so GPS, original timesta
 
 ## Behaviour rules
 
-- If the user asks to "blur a face/text" without coordinates, ask for the bounding box — this skill does not detect content.
+- If the user gives no coordinates, get them from `scan-screenshot` for text. For faces and other non-text content, read the image dimensions and locate the region by eye.
 - After writing, report: output path, regions redacted, method per region, and a one-line reminder that the original still contains the unredacted content.

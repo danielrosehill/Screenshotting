@@ -12,11 +12,12 @@ Designed for Ubuntu and other Linux desktops, on X11 and Wayland.
 | `annotate` | Arrows, boxes, text, highlights and numbered markers via JSON spec, or a GUI editor |
 | `capture-and-annotate` | Capture and annotate in one step |
 | `ocr-screenshot` | Extract text with Claude's vision, Tesseract, or any local OCR command |
+| `scan-screenshot` | Flag PII, secrets and other risks in a screenshot, then route to spoofing or redaction |
 | `spoof-page-screenshot` | Swap private text in a live web page for stand-ins, verify, then capture |
 | `redact` | Pixelate, blur or black out regions of an existing image |
 | `batch-to-webp` | Bulk WebP conversion |
 | `batch-to-pdf` | Bundle images into one PDF |
-| `install-deps` | Install whatever is missing |
+| `setup-environment` | Lists every CLI the plugin uses, checks them and installs what is missing |
 
 ## Originals-clean rule
 
@@ -31,6 +32,7 @@ Source images are never modified. Output goes to `<dir>/annotated/`, `<dir>/reda
 | Annotation, scripted | Pillow (`scripts/annotate.py`) | |
 | Annotation, by hand | Flameshot at capture time | satty, swappy, ksnip for existing images |
 | OCR | Claude's vision | Tesseract, any local OCR command |
+| Risk scan | Tesseract word boxes, built-in patterns, gitleaks, exiftool | Claude's vision for names, faces and context |
 | Page spoofing | `scripts/spoof-dom.js` in Claude in Chrome | Any browser tool with JS evaluate, or the DevTools console |
 | Redaction | ImageMagick | |
 
