@@ -1,6 +1,6 @@
 ---
 name: batch-to-pdf
-description: Bundle a set of (typically annotated) images into a single PDF — for tutorials, bug reports, step-by-step guides, or printable documentation. Preserves order, leaves source images untouched, and uses img2pdf for lossless inclusion when available.
+description: "Bundle screenshots into one PDF for tutorials, bug reports or step-by-step guides. Keeps order; sources stay untouched."
 ---
 
 # Batch to PDF

@@ -1,6 +1,6 @@
 ---
 name: annotate
-description: Apply annotations to an image — arrows, text callouts, boxes, highlights, numbered markers — driven by a JSON spec. Originals are never modified; output goes to <input_dir>/annotated/<stem>_annotated<ext> by default.
+description: "Annotate a screenshot from the CLI: arrows, text callouts, boxes, highlights, numbered markers via JSON spec, or a GUI editor."
 ---
 
 # Annotate
@@ -58,3 +58,10 @@ Coordinates are pixels from the top-left of the image.
 ## When the user wants something simple
 
 For a one-shot "draw an arrow at X→Y", still go through this script with a one-op spec. Don't reach for a separate ImageMagick invocation — keeping a single code path keeps the originals-clean rule airtight.
+
+## Interactive annotation
+
+The JSON spec suits annotations the agent can place itself. When the user wants to draw by hand:
+
+- **While capturing:** `bash "$CLAUDE_PLUGIN_ROOT/scripts/screenshot.sh" annotate <output_path>` opens Flameshot's selection with its toolbar (arrows, boxes, text, blur). The user confirms in the toolbar.
+- **On an existing image:** `bash "$CLAUDE_PLUGIN_ROOT/scripts/edit.sh" <image> [output_path]` opens satty, swappy or ksnip, whichever is installed first (`SCREENSHOT_EDITOR` forces one). Flameshot cannot open an existing file. The original stays untouched and the output defaults to `<dir>/annotated/<stem>_annotated.png`. Exit 2 means the editor closed without saving.

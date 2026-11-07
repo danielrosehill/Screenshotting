@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- Fixture for scripts/spoof-dom.js. All data is invented.
+     Covers: plain text, attributes, form value, title, open shadow root,
+     nested shadow root, a split term, a word that must survive whole-word
+     matching, and a re-render like a framework state push (window.rerender). -->
+<title>Doses: Zorbivex</title>
+<body style="font: 20px sans-serif; background: #fff; color: #111; padding: 2em">
+<h1>Dose log</h1>
+<p id="plain" title="Zorbivex 20mg">Zorbivex 20mg taken at 08:00</p>
+<p>Annual review with Ann</p>
+<p>Split: <b>Quel</b>tamine</p>
+<input id="field" value="Zorbivex" style="font-size: 20px">
+<dose-card id="card"></dose-card>
+<script>
+  class InnerCard extends HTMLElement {
+    constructor() { super(); this.attachShadow({ mode: 'open' }).innerHTML = '<p>Nested: Zorbivex</p>'; }
+  }
+  class DoseCard extends HTMLElement {
+    constructor() { super(); this.attachShadow({ mode: 'open' }); this.n = 1; this.render(); }
+    render() {
+      this.shadowRoot.innerHTML = `<p>Shadow: Queltamine dose ${this.n}</p><inner-card></inner-card>`;
+    }
+  }
+  customElements.define('inner-card', InnerCard);
+  customElements.define('dose-card', DoseCard);
+  window.rerender = () => { const c = document.getElementById('card'); c.n++; c.render(); };
+</script>
+</body>

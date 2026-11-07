@@ -1,6 +1,6 @@
 ---
 name: batch-to-webp
-description: Batch-convert images to WebP for web-optimised output. Originals are left untouched; converted files land in <dir>/webp/<stem>.webp by default. Supports lossy quality control or lossless mode.
+description: "Batch-convert screenshots to WebP for the web, lossy or lossless. Originals stay untouched; output in <dir>/webp/."
 ---
 
 # Batch to WebP

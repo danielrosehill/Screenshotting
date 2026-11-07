@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install dependencies for the image-annotation plugin.
+# Install dependencies for the screenshotting plugin.
 # Detects distro and desktop session, installs only what is missing.
 # Idempotent: safe to re-run.
 
@@ -26,15 +26,12 @@ DESKTOP="${XDG_CURRENT_DESKTOP:-unknown}"
 log "distro=$DISTRO session=$SESSION desktop=$DESKTOP"
 
 # --- Pick screenshot backend -------------------------------------------
-SCREENSHOT_PKGS=()
+# Flameshot is the default everywhere; the others fill the gaps it leaves.
+SCREENSHOT_PKGS=("flameshot")
 case "$DESKTOP" in
   *KDE*)        SCREENSHOT_PKGS+=("kde-spectacle") ;;
-  *GNOME*)      SCREENSHOT_PKGS+=("flameshot") ;;
   *sway*|*Hyprland*|*wlroots*) SCREENSHOT_PKGS+=("grim" "slurp") ;;
-  *) SCREENSHOT_PKGS+=("flameshot") ;;
 esac
-# Always offer flameshot as cross-desktop fallback
-[[ " ${SCREENSHOT_PKGS[*]} " == *" flameshot "* ]] || SCREENSHOT_PKGS+=("flameshot")
 
 # --- Build install list per distro --------------------------------------
 case "$DISTRO" in
@@ -77,6 +74,10 @@ needs magick imagemagick
 have python3 && python3 -c 'import PIL' 2>/dev/null && log "ok: python3-pil" || TO_INSTALL+=("${BASE_PKGS[1]}")
 needs img2pdf img2pdf
 needs cwebp "${BASE_PKGS[3]}"
+case "$DISTRO" in
+  ubuntu|debian|linuxmint|pop) needs tesseract tesseract-ocr ;;
+  *) needs tesseract tesseract ;;
+esac
 
 for pkg in "${SCREENSHOT_PKGS[@]}"; do
   bin="$pkg"

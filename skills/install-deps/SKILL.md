@@ -1,6 +1,6 @@
 ---
 name: install-deps
-description: Install the CLI tools this plugin depends on — ImageMagick, Pillow, img2pdf, cwebp, and at least one screenshot backend (spectacle, grim+slurp, or flameshot). Idempotent setup script that detects distro and desktop session and installs only what is missing.
+description: "Install what the screenshotting plugin needs: Flameshot, Spectacle or grim, ImageMagick, Pillow, Tesseract, img2pdf, cwebp."
 ---
 
 # Install Dependencies
@@ -24,7 +24,14 @@ It detects:
 - `python3-pillow` — Pillow-based annotator
 - `img2pdf` — lossless image → PDF
 - `webp` / `libwebp-tools` (binary `cwebp`) — WebP conversion
-- One screenshot backend matching the session: `spectacle` (KDE), `grim` + `slurp` (wlroots Wayland), `flameshot` (everywhere else / fallback)
+- `tesseract` — local OCR
+- `flameshot` — default screenshot backend, on every desktop
+- `kde-spectacle` on KDE (active-window captures, which Flameshot lacks); `grim` + `slurp` on wlroots Wayland
+
+Not installed by the script:
+
+- A GUI editor for existing images: `ksnip` or `swappy` from apt, `satty` where packaged.
+- OCR languages beyond English: `tesseract-ocr-<lang>` on apt, e.g. `tesseract-ocr-heb`.
 
 ## Behaviour rules
 

@@ -1,6 +1,6 @@
 ---
 name: capture-and-annotate
-description: One-shot orchestrator — take a screenshot and immediately apply annotations. Combines the screenshot and annotate skills for the common "grab this region and draw an arrow at it" workflow.
+description: "Take a screenshot and annotate it in one step: \"grab this and draw an arrow\", \"screenshot and label it\", \"circle this\"."
 ---
 
 # Capture and Annotate
@@ -23,6 +23,14 @@ Compose `screenshot` + `annotate` into one step. Use when the user says things l
    ```
 5. Delete the temp file (`rm "$TMP"`).
 6. Report the final path.
+
+## When the user wants to draw by hand
+
+Skip the flow above and run one command, which captures and opens Flameshot's annotation toolbar:
+
+```bash
+bash "$CLAUDE_PLUGIN_ROOT/scripts/screenshot.sh" annotate "$FINAL"
+```
 
 ## Default output
 

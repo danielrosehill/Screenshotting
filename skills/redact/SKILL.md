@@ -1,9 +1,11 @@
 ---
 name: redact
-description: Privacy redaction — pixelate (default), blur, or solid-fill rectangular regions of an image to hide sensitive content (faces, names, tokens, IPs, PII). Originals are never modified; output goes to <input_dir>/redacted/<stem>_redacted<ext>. EXIF is stripped on output.
+description: "Pixelate, blur or black out regions of an existing screenshot. For live web pages prefer spoof-page-screenshot."
 ---
 
 # Redact
+
+For a page open in a browser, `spoof-page-screenshot` usually gives a better result: stand-in text looks real, where pixelated blocks draw attention. Use this skill for desktop apps, images already captured, and page content that cannot be spoofed (images, canvas).
 
 Hide sensitive regions of an image. Use this rather than `annotate` when the goal is privacy — defaults are tuned to make the redaction non-recoverable.
 
